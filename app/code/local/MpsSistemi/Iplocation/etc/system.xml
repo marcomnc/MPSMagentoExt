@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <mpssettings translate="label" module="mpslocation">
+            <label>Mps Sistemi Settings</label>
+            <sort_order>999</sort_order>
+        </mpssettings>
+    </tabs>      
+    <sections>
+        <mpslocation_options translate="label" module="mpslocation">
+            <label>Geolocalizzazione</label>
+            <tab>mpssettings</tab>
+            <sort_order>500</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <store_zone>
+                    <label>Parametri gestione localizzazione zone</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>          
+                    <fields>
+                        <infodb_key>
+                            <label>Chiave per servizio di geolocalizzazione</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Chiave API per la geolocalizzazione tramite il servizio <strong>Info DB</strong>.<br>Ulteriori info in <a href="http://www.ipinfodb.com/index.php">www.ipinfodb.com</a>]]></comment>                        
+                        </infodb_key>          
+                    </fields>
+                </store_zone>
+            </groups>            
+        </mpslocation_options>
+    </sections>
+</config>
