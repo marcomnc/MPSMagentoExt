@@ -27,6 +27,9 @@
         <MpsSistemi_Iplocation>
             <active>true</active>
             <codePool>local</codePool>
+            <depends>
+            	<MpsSistemi_Core />		
+            </depends>
         </MpsSistemi_Iplocation>
     </modules>
 </config>
