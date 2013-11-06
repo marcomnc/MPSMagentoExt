@@ -33,6 +33,8 @@ class MpsSistemi_Iplocation_Block_Adminhtml_Zone_Edit_Tab_Main
         $fieldset = $form->addFieldset('base_fieldset', 
                 array('legend'=>Mage::helper('mpslocation')->__('Gestione Zona')));
 
+        $fieldset = Mage::helper('mpscore/adminhtml_data_form_element')->addMiltiselect($fieldset);
+        
         if ($model->getId()) {
             $fieldset->addField('entity_id', 
                                 'hidden', array('name' => 'entity_id',));
@@ -120,7 +122,7 @@ class MpsSistemi_Iplocation_Block_Adminhtml_Zone_Edit_Tab_Main
             'disabled'  => $isElementDisabled,
         ));
         
-        $fieldset->addField('state_list', 'Custommultiselect', array(
+        $fieldset->addField('state_list', 'custommultiselect', array(
             'name'      => 'state_list',
             'label'     => Mage::helper('mpslocation')->__('Lista Stati'),
             'title'     => Mage::helper('mpslocation')->__('Lista Stati della zona'),
