@@ -30,5 +30,38 @@
             <label>Mps Sistemi Settings</label>
             <sort_order>999</sort_order>
         </mpssettings>
-    </tabs>   
+    </tabs> 
+    <sections>
+        <mpscore_options translate="label" module="mpscore">
+            <label>Configurazioni di base</label>
+            <tab>mpssettings</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <groups>
+                <skin_config>
+                    <label>Configurazioni di base da applicare allo skin</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>          
+                    <fields>
+                        <include_jquery>
+                            <label>Includere JQUERY</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <comment>Indica se jquery deve essere incluso. Se è già incluso nel thema di base o in altre estensioni mettere no.</comment>
+                        </include_jquery>
+                        <define_jquery_redirect>
+                            <label>Definire $j</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <comment>Indica se $j deve essere definito. Se è già definitio nel thema di base o in altre estensioni mettere no.</comment>
+                        </define_jquery_redirect>                            
+                    </fields> 
+                </skin_config>                   
+            </groups>            
+        </mpscore_options>
+    </sections>  
 </config>

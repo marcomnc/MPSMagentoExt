@@ -60,7 +60,7 @@
         <layout>
             <updates>
                 <autelsocial>
-                    <file>mpstwitter.xml</file>
+                    <file>mps/mpstwitter.xml</file>
                 </autelsocial>
             </updates>
         </layout>  

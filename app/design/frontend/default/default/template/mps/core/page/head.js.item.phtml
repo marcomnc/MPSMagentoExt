@@ -1,0 +1,19 @@
+<?php
+// Verfiico se devo includere jquery
+if (Mage::getStoreConfig('mpscore_options/skin_config/include_jquery')): ?>
+    <script type="text/javascript" src="<?php echo Mage::getBaseUrl('js') ?>mps/jquery/jquery-1.7.1.min.js"></script>
+<?php
+endif;
+?>
+
+<?php
+// Verfiico se devo includere jquery
+if (Mage::getStoreConfig('mpscore_options/skin_config/include_jquery')): ?>
+<script>
+  if (typeof($j) == 'undefined') {
+      $j = jQuery.noConflict();
+  }  
+</script>
+<?php
+endif;
+?>

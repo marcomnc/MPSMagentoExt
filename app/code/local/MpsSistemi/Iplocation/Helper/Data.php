@@ -304,16 +304,9 @@ class MpsSistemi_Iplocation_Helper_Data extends MpsSistemi_Core_Helper_Data {
         }
 
         if ($country === false && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            foreach (explode(",", strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE'])) as $accept) {
-                if (preg_match("!([a-z-]+)(;q=([0-9.]+))?!", trim($accept), $found)) {
-                    $langs[] = $found[1];
-                    $quality[] = (isset($found[3]) ? (float) $found[3] : 1.0);
-                    //Mage::log("Found language in request: ".$langs." with quality ".$quality);
-                }
-            }
-            // Order the codes by quality
-            array_multisort($quality, SORT_NUMERIC, SORT_DESC, $langs);
-            // iterate through languages found in the accept-language header
+            
+            $langs = $this->getLangsFromBrowserAgent();
+            
             foreach ($langs as $lang) {
                 $lang = substr($lang,0,2);
                 foreach (Mage::getModel('core/store')->getCollection() as $_store) {
@@ -330,7 +323,7 @@ class MpsSistemi_Iplocation_Helper_Data extends MpsSistemi_Core_Helper_Data {
         return $country;
     }
     
-    
+   
     /**
      * Resetta eventuali configurazione dei permessi delle country per store e dei metodi di spedizione abilitati per store
      */

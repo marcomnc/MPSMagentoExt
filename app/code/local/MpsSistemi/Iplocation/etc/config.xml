@@ -9,7 +9,7 @@
 
 <!--http://www.magentocommerce.com/wiki/5_-_modules_and_development/0_-_module_development_in_magento/customizing_magento_using_event-observer_method#list_of_events-->        
         <events>
-<!-- Evento dispatcher del controller base 
+<!-- Evento dispatcher del controller base -->
             <controller_front_init_routers>
                 <observers>
                     <mpslsistemi_iplocation_observer>
@@ -18,7 +18,7 @@
                         <method>pre_dispatch</method>
                     </mpslsistemi_iplocation_observer>
                 </observers>
-            </controller_front_init_routers>-->
+            </controller_front_init_routers>
         </events>  
 
         <blocks>

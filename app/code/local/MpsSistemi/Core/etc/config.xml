@@ -23,6 +23,16 @@
             </mpscore>
         </models>            
     </global> 
+    
+    <frontend><layout>
+            <updates>
+                <mpslocation>
+                    <file>mps/mpscore.xml</file>
+                </mpslocation>
+            </updates>
+        </layout>
+    </frontend>
+    
     <adminhtml>
         <layout>
             <updates>
@@ -31,6 +41,27 @@
                 </mpscore>
             </updates>
         </layout>
+        
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <mpscore_options>
+                                            <title>Mps Sistemi Core Settings</title>
+                                        </mpscore_options>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+		    </children>
+                </admin>
+            </resources>
+        </acl>
+        
     </adminhtml>
     
 </config>

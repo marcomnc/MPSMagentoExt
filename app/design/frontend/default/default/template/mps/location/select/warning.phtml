@@ -1,0 +1,27 @@
+<pre>
+<?php 
+$_myStore = Mage::Registry(MpsSistemi_Iplocation_Model_Core_Dispatch::REGISTER_NAME);
+
+print_r($_myStore);
+die();
+
+if ($_myStore->getAction() == MpsSistemi_Iplocation_Model_Core_Dispatch::ACTION_WARNING_SELECT):    
+?>    
+
+<div id="mpslocation_alert mps-t-height">
+    <div class="container">
+        <div class="mps_23">
+            <span id="mps_alert_message">
+                <?php echo $this->__("We have set your delivery country to Italy and your language to English") ?>
+            </span> 
+            <p id="mps_alert_message"> | <a href="#" class="mps_link mpslocation-change-country"><?php echo $this->__("Change country");?></a></p>
+        </div>
+        <div id="rs_alert_close_container" class="mps_23 last">
+            <a id="rs_alert_close_link" href="#"><?php $this->__('Close X');?></a>
+        </div>
+    </div>
+</div>
+
+<?php
+endif;
+?>
