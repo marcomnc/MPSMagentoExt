@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *  
  *
- * @category    Core
- * @package     PrivateSales   
+ * @category    
+ * @package     
  * @copyright   Copyright (c) 2013 Mps Sistemi (http://www.mps-sistemi.it)
  * @author      MPS Sistemi S.a.s - Marco Mancinelli <marco.mancinelli@mps-sistemi.it>
  *
@@ -26,16 +26,10 @@
 
 
 <config>
-    <tabs>
-        <mpssistemi translate="label" module="mpstwitter">
-            <label>Mps Sistemi</label>
-            <sort_order>999</sort_order>
-        </mpssistemi>
-    </tabs>  
     <sections>
         <mpstwitter translate="label" module="mpstwitter">
             <label>Twitter Configuration</label>
-            <tab>mpssistemi</tab>
+            <tab>mpssettings</tab>
             <sort_order>999</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>

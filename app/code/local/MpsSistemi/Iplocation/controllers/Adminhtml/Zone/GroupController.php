@@ -67,7 +67,7 @@ class MpsSistemi_Iplocation_Adminhtml_Zone_GroupController extends Mage_Adminhtm
             }
         }
         
-        $this->_title($model->getId() ? $model->getName() : $this->__('Nuovo Gruppo'));
+        $this->_title($model->getId() ? $model->getGroupName() : $this->__('Nuovo Gruppo'));
         
         $data = Mage::getSingleton('adminhtml/session')->getFormData(true);        
         if (! empty($data)) {
