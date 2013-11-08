@@ -6,7 +6,18 @@
         </MpsSistemi_ColorSwitch>
     </modules>
     <global>
-
+        <event>
+            <!-- Memorizzazione Attributi (per gestire le immagini) -->            
+            <catalog_entity_attribute_save_after>
+                <observers>
+                    <mpswitcer_observer>
+                        <type>singleton</type>
+                        <class>MpsSistemi_ColorSwitch_Model_Adminhtml_Observer</class>
+                        <method>on_attribute_after_save</method>
+                    </mpswitcer_observer>
+                </observers>
+            </catalog_entity_attribute_save_after>
+        </event>
         <blocks>
             <mpsswitcher>
                 <class>MpsSistemi_ColorSwitch_Block</class>
@@ -21,17 +32,45 @@
                 </rewrite>
             </adminhtml>
         </blocks>
-<!--        <helpers>
+        <helpers>
             <mpsswitcher>
                 <class>MpsSistemi_ColorSwitch_Helper</class>
             </mpsswitcher>            
-        </helpers>        
+        </helpers>     
         <models>    
             <mpsswitcher> 
                 <class>MpsSistemi_ColorSwitch_Model</class>                
+                <resourceModel>mpsswitch_mysql4</resourceModel>
             </mpsswitcher>
-        </models>     -->
-       
+            <mpsswitcher_mysql4>
+                <class>MpsSistemi_ColorSwitch_Model_Mysql4</class>
+                <entities>
+                    <coloroptions>
+                        <table>mps_switch_color_options</table>
+                    </coloroptions>                         
+                </entities>
+            </mpsswitcher_mysql4>
+        </models>     
+       <resources>
+            <mpsswitcher_setup>
+                <setup>
+                    <module>MpsSistemi_ColorSwitch</module>
+                </setup>                
+                <connection>
+                    <use>core_setup</use>
+                </connection>                
+            </mpsswitcher_setup>
+            <mpsswitcher_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mpsswitcher_write>
+            <mpsswitcher_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mpsswitcher_read>
+        </resources>
     </global> 
     
     <frontend>

@@ -34,23 +34,36 @@ class Veredus_Veredus_Block_Adminhtml_Catalog_Product_Helper_Form_Gallery_Conten
         
         $atrtibuteList = $this->getProduct()->getAttributes($this->getProduct()->getAttributeSetId());
         
-        $colorAttribute = MAge::Helper('veredus/media')->getAttributeColorArray();        
+        $colorAttribute = MAge::Helper('mpsswitcher/media')->getAttributeColorArray();        
 
         if ($this->getProduct()->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE && $colorAttribute !== false) {
             // && array_search('mps_color_switcher', $atrtibuteList) !== false) {
             
             foreach ($this->getProduct()->getTypeInstance(true)->getConfigurableAttributes($this->getProduct()) as $att) {
                 if (array_search($att->getProductAttribute()->getAttributeCode(), $colorAttribute) !== false) { 
-                    $this->setTemplate('veredus/catalog/product/helper/gallery.color.phtml');
-                    $this->masterColorAttribute = $att->getProductAttribute()->getAttributeCode();
-                    $this->_colorValueList = Mage::Helper('veredus/media')->loadColorList($this->getProduct(), $att->getProductAttribute()->getAttributeCode());
+                    //$this->setTemplate('veredus/catalog/product/helper/gallery.color.phtml');
+                    $this->_masterColorAttribute = $att->getProductAttribute()->getAttributeCode();
+                    $this->_colorValueList = Mage::Helper('mpsswitcher/media')->loadColorList($this->getProduct(), $att->getProductAttribute()->getAttributeCode());
                     
                     break;
                 }
-            };
+            }
         }        
         
     }
+    
+    protected function _toHtml() {
+        
+        if ($this->_masterColorAttribute != "") {
+            ob_start();
+            include __DIR__ .'/gallery.color.phtml';
+            $html = ob_get_clean();
+            return $html;
+        } else {
+            return parent::_toHtml();
+        }
+    }
+    
     
     public function getColorList() {
         return $this->_colorValueList;

@@ -27,7 +27,7 @@ class MpsSistemi_ColorSwitch_Block_Adminhtml_Catalog_Attribute_Edit_Tabs extends
         
         parent::_beforeToHtml();
 
-        $colorAttribute = MAge::Helper('mpsswitch/media')->getAttributeColorArray();
+        $colorAttribute = MAge::Helper('mpsswitcher/media')->getAttributeColorArray();
         if ($colorAttribute !== false) {
             
             $model = Mage::registry('entity_attribute');
