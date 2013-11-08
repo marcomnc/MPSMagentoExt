@@ -133,7 +133,7 @@ class MpsSistemi_Iplocation_Helper_Data extends MpsSistemi_Core_Helper_Data {
                         continue;
                     }
                 }
-            }
+            }            
             
             $zoneList[$zone->getId()] =  array('description' => $zone->getDescription(), 'group' => $zone->getGroupName());
         }
@@ -298,7 +298,7 @@ class MpsSistemi_Iplocation_Helper_Data extends MpsSistemi_Core_Helper_Data {
     
         public function getCountryFromIp($ip = "") {
         $country = false;
-        $stateIso2 = $this->_getGeoIpState($ip,true);
+        $stateIso2 = $this->_getGeoIpState($ip);
         if ($stateIso2 !== false) {
             $country = Mage::getModel('directory/country')->Load($stateIso2);
         }

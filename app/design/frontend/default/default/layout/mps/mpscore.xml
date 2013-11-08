@@ -5,6 +5,22 @@
     <!-- Default su tutte le pagine -->
     <default>
         <reference name="head">
+            <action method="addItemIfConfig">
+                <type>js</type>
+                <name>mps/jquery/jquery-1.7.1.min.js</name>
+                <condConfig>mpscore_options/skin_config/include_jquery</condConfig>
+            </action>            
+            <action method="addItemIfConfig">
+                <type>js</type>
+                <name>mps/jquery/plugins/fancybox/jquery.fancybox-1.3.4.pack.js</name>
+                <condConfig>mpscore_options/skin_config/include_jquery_fancybox</condConfig>
+            </action> 
+            <action method="addItemIfConfig">
+                <type>js_css</type>
+                <name>mps/jquery/plugins/fancybox/jquery.fancybox-1.3.4.css</name>
+                <condConfig>mpscore_options/skin_config/include_jquery_fancybox</condConfig>
+            </action>             
+            <action method="addItem"><type>js_css</type><name>mps/mpscore.css</name></action>            
             <block type="core/template" name="core.head.js.item" as="core.head.js.item" template="mps/core/page/head.js.item.phtml"/>
         </reference>        
     </default>

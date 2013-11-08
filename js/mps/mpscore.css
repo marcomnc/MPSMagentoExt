@@ -1,9 +1,10 @@
-mps-t-height {
+.mps-t-height {
         transition:             height 500ms ease-in-out;
         -moz-transition:        height 500ms ease-in-out;
         -webkit-transition:     height 500ms ease-in-out;
         -o-transition:          height 500ms ease-in-out;
     }
     
+.mps-hide-height {height: 0px!important}    
 .mps_23 { width: 66% }
 .mps_13 { width: 33% }

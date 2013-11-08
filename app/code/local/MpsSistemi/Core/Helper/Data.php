@@ -20,5 +20,24 @@ class MpsSistemi_Core_Helper_Data extends Mage_Core_Helper_Abstract {
         return $langs;
     }
     
+    public function getIsHomePage() {
+        return $this->getIsSpecifyCMSPage(Mage::app()->getStore()->getConfig('web/default/cms_home_page'));
+    }
+    
+    public function getIsSpecifyCMSPage($idPage)
+    {
+        $page = Mage::app()->getFrontController()->getRequest()->getRouteName();
+        $specPage = false;
+
+        if($page =='cms'){
+            $cmsSingletonIdentifier = Mage::getSingleton('cms/page')->getIdentifier();
+            if($cmsSingletonIdentifier == $idPage){
+                $specPage = true;
+            }
+        }
+
+        return $specPage;
+    }  
+    
 }
 ?>
