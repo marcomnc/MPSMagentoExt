@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MpsSistemi_ColorSwitch>
+            <version>0.1.0</version>
+        </MpsSistemi_ColorSwitch>
+    </modules>
+    <global>
+
+        <blocks>
+            <mpsswitcher>
+                <class>MpsSistemi_ColorSwitch_Block</class>
+            </mpsswitcher>
+            <adminhtml>
+                <rewrite>
+                    <!-- Aggiungo la tab manage colors -->
+                    <catalog_product_attribute_edit_tabs>MpsSistemi_ColorSwitch_Block_Adminhtml_Catalog_Attribute_Edit_Tabs</catalog_product_attribute_edit_tabs>
+                    <!-- Aggiungo l'encrypt type sul form -->
+                    <catalog_product_attribute_edit_form>MpsSistemi_ColorSwitch_Block_Adminhtml_Catalog_Attribute_Edit_Form</catalog_product_attribute_edit_form>
+                    <catalog_product_helper_form_gallery_content>MpsSistemi_ColorSwitch_Block_Adminhtml_Catalog_Product_Helper_Form_Gallery_Content</catalog_product_helper_form_gallery_content>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+<!--        <helpers>
+            <mpsswitcher>
+                <class>MpsSistemi_ColorSwitch_Helper</class>
+            </mpsswitcher>            
+        </helpers>        
+        <models>    
+            <mpsswitcher> 
+                <class>MpsSistemi_ColorSwitch_Model</class>                
+            </mpsswitcher>
+        </models>     -->
+       
+    </global> 
+    
+    <frontend>
+        <layout>
+            <updates>
+                <mpsswitcher>
+                    <file>mps/mpcolorswitcher.xml</file>
+                </mpsswitcher>
+            </updates>
+        </layout>
+    </frontend>
+    
+</config>
