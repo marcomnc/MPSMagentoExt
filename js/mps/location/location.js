@@ -5,7 +5,7 @@
             var url = settings.url;
             if (settings.countryCode != "") {
                 url+='countryCode/'+settings.countryCode+'/';
-            }
+            }            
             url+='home/'+settings.home+'/urlref/'+settings.urlref+'/'
             $j.fancybox({autoScale   : true,
                          showCloseButton : false,
@@ -36,5 +36,27 @@
             }
         });
     };
+    
+    $.fn.locationWarning = function(isHome) {
+        
+        var $this = $(this);
+        $(this).height(30);
+        $(this).find('.container').show();
+        $(this).find('#rs_alert_close_link').click(function() {
+            $this.height(0);
+            $this.find('div').css({'display': 'none'});
+        });
+        
+        $('#' + $(this).attr('id') + ' .mpslocation-change-country').click( function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $.fn.selectCountry({'url': $(this).attr('href'),
+                             'countryCode': '',
+                             'home': (isHome) ? 1 :0 ,
+                             'urlref': window.btoa(unescape(encodeURIComponent( window.location ))),
+                             'enableEsc': true});
+        });
+        
+    }
 })(jQuery, this);
 

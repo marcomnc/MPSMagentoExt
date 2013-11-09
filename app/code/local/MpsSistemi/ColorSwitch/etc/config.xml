@@ -40,7 +40,7 @@
         <models>    
             <mpsswitcher> 
                 <class>MpsSistemi_ColorSwitch_Model</class>                
-                <resourceModel>mpsswitch_mysql4</resourceModel>
+                <resourceModel>mpsswitcher_mysql4</resourceModel>
             </mpsswitcher>
             <mpsswitcher_mysql4>
                 <class>MpsSistemi_ColorSwitch_Model_Mysql4</class>

@@ -15,7 +15,7 @@ class MpsSistemi_Iplocation_LocationController extends Mage_Core_Controller_Fron
         
         $block = $this->getLayout()->createBlock('mpslocation/select');
         
-        if ($action == MpsSistemi_Iplocation_Model_Core_Dispatch::ACTION_WARNING || $action == MpsSistemi_Iplocation_Model_Core_Dispatch::ACTION_WARNING_SELECT) {
+        if ($action == MpsSistemi_Iplocation_Model_Core_Dispatch::ACTION_WARNING) {
             $block->setWarning(true);
         }
         if ($urlref != "") {
@@ -55,7 +55,7 @@ class MpsSistemi_Iplocation_LocationController extends Mage_Core_Controller_Fron
             //Voglio continuare senza stato impostato                        
             MpsSistemi_Iplocation_Model_Core_Dispatch::setCookie($cookie, 60*60*24); //x Un giorno
         } else {
-            
+            $cookie->setAction(MpsSistemi_Iplocation_Model_Core_Dispatch::ACTION_NO_ACTIONO); 
             // PAese Geolocalizzato
             $cookie->setData('country_code', $country);
             $cookie->setData('country_name', Mage::getModel('directory/country')->load($country)->getName());

@@ -9,8 +9,7 @@
             <action method="addItem"><type>js_css</type><name>mps/location/location.css</name></action>
         </reference>
         <reference name="after_body_start">
-            <!--<block type="mpslocation/select" name="location.select" as="location.select" template="mps/location/select/form.phtml"/>-->
-            <block type="mpslocation/select" name="location.warnings" as="location.warning" template="mps/location/select/warning.phtml"/>
+            <block type="mpslocation/select" name="location.warnings" as="location.warning" />
         </reference>        
     </default>
         

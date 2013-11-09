@@ -26,7 +26,6 @@ class MpsSistemi_Iplocation_Model_Core_Dispatch {
     const COOKIE_NAME           = 'storeLocator';
     const REGISTER_NAME         = '_mps/location/store_status';
     const ACTION_NO_ACTIONO     = 'NAN';
-    const ACTION_WARNING_SELECT = 'AWS';
     const ACTION_WARNING        = 'AW';
     const ACTION_SELECT         = 'AS';
     
@@ -38,12 +37,18 @@ class MpsSistemi_Iplocation_Model_Core_Dispatch {
 	if (Mage::app()->getStore()->getId() == 0)
 		return $observer;
  
-        $cookie = self::getCookie();
-        $front = $observer->getFront()->getRequest()->getParams();
+        $cookie = self::getCookie();      
+        $front = $observer->getFront()->getRequest()->getParams();         
         
-        if (!$cookie->hasData() || !$cookie->hasData('version') || $cookie->getData('version') != self::COOKIE_VERSION) {
+        if (isset($front['___reset_cookie'])) {
+            $cookie->unsetData();
+            self::setCookie($cookie);
+        }
+        
+        if ((!$cookie->hasData() || !$cookie->hasData('version') || $cookie->getData('version') != self::COOKIE_VERSION) ||
+            (isset($front['___ip_test']) && $front['___ip_test'] != "")) { 
             //Tento la geolocalizzazione e creo il cookie di base
-            $country = Mage::helper('mpslocation')->getCountryFromIp();
+            $country = Mage::helper('mpslocation')->getCountryFromIp(((isset($front['___ip_test']) && $front['___ip_test'] != ""))? $front['___ip_test'] : "");
             if ($country !== false && $country instanceof Mage_Directory_Model_Country) {
                
                 // PAese Geolocalizzato
@@ -69,6 +74,12 @@ class MpsSistemi_Iplocation_Model_Core_Dispatch {
                 }
                 
             }
+        }
+        
+        if (isset($front['___please_logme_store_cookie']) && $front['___please_logme_store_cookie'] == "yes") {
+            echo "<pre>";
+            print_r($cookie);
+            die();
         }
         
 //echo Mage::app()->getStore()->getWebSiteId() . " - <pre>";
@@ -215,7 +226,7 @@ class MpsSistemi_Iplocation_Model_Core_Dispatch {
     
     private static function _getLanguage() {
 
-        $langs = $this->getLangsFromBrowserAgent();
+        $langs = Mage::Helper('mpscore')->getLangsFromBrowserAgent();
         
         foreach ($langs as $lang) {
             return $lang;

@@ -27,7 +27,7 @@ $table_color_attribute = $installer->getConnection()
         ), 'Codice esadecimale del colore')
     ->addIndex(
         $installer->getIdxName(
-            'autelcorto/coloroptions',
+            'mpsswitcher/coloroptions',
             array('option_id'),
             Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE
         ),

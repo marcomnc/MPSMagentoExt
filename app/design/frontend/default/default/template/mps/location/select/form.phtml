@@ -1,7 +1,6 @@
-
 <?php 
 $currentZoneId = "";
-if ($this->getCurrent() instanceof Autel_Corto_Model_Zone):
+if ($this->getCurrent() instanceof MpsSistemi_Iplocation_Model_Zone):
     $currentZoneId = $this->getCurrent()->getId();
 endif;
 $isHome = $this->getRequest()->getParam('home');
@@ -49,10 +48,10 @@ endif;
         var href = "<?php echo $this->getUrl('mpslocation/location/set/');?>";
         href += "zone/" + $j('#mpslocation_region_selector :selected').val() +"/";
         href += "home/<?php echo $isHome;?>/";
-        <?php if ($this->getReffere()): ?>
-            href += "urlref/<?php echo $this->getReffere();?>/";
+        <?php if ($this->getReferrer()): ?>
+            href += "urlref/<?php echo $this->getReferrer();?>/";
         <?php endif; ?>
-        
+ 
         $j.fn.setCountryCookie(href);
         
     });

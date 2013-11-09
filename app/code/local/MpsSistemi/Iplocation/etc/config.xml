@@ -167,4 +167,14 @@
         </acl>
     </adminhtml>    
     
+    <default>
+        <mpslocation_options>
+            <location_template>
+                <show_in_case_warning>WAR</show_in_case_warning>
+                <show_in_case_error>ERR</show_in_case_error>
+                <warning_template>mps/location/select/warning.phtml</warning_template>
+                <error_template>mps/location/select/select.phtml</error_template>
+            </location_template>
+        </mpslocation_options>
+    </default>
 </config>

@@ -23,4 +23,72 @@
  */
 class MpsSistemi_Iplocation_Block_Select extends Mage_Core_Block_Template {
 
+    protected $_inCaseOfWarning = "";
+    protected $_inCaseOfError = "";
+    
+    protected $_warningTemplate = "mps/location/select/warning.phtml";
+    protected $_selectTemplate =  "mps/location/select/select.phtml";                                  
+    
+    public function _construct() {
+        
+        $this->_inCaseOfWarning = Mage::getStoreConfig('mpslocation_options/location_template/show_in_case_warning');
+        $this->_inCaseOfError = Mage::getStoreConfig('mpslocation_options/location_template/show_in_case_error');
+        
+        $warningTemplate = Mage::getStoreConfig('mpslocation_options/location_template/warning_template');
+        $selectTemplate = Mage::getStoreConfig('mpslocation_options/location_template/error_template');
+        
+        parent::_construct();
+        
+        $cookie = Mage::Registry(MpsSistemi_Iplocation_Model_Core_Dispatch::REGISTER_NAME);
+        switch ($cookie->getAction()) {
+            case MpsSistemi_Iplocation_Model_Core_Dispatch::ACTION_WARNING:
+
+                switch ($this->_inCaseOfWarning) {
+                    case MpsSistemi_Iplocation_Model_Adminhtml_System_Config_Source_ViewType::WARNING:
+
+                        $this->setTemplate(($warningTemplate) ? $warningTemplate : $this->_warningTemplate);
+
+                        break;
+    
+                    case MpsSistemi_Iplocation_Model_Adminhtml_System_Config_Source_ViewType::ERROR:
+
+                        $this->setTemplate(($selectTemplate) ? $selectTemplate : $this->_selectTemplate);
+
+                        break;
+
+                    default:
+                        break;
+                }                    
+
+                break;
+            
+            case MpsSistemi_Iplocation_Model_Core_Dispatch::ACTION_SELECT:
+
+                switch ($this->_inCaseOfError) {
+                    case MpsSistemi_Iplocation_Model_Adminhtml_System_Config_Source_ViewType::WARNING:
+
+                        $this->setTemplate(($warningTemplate) ? $warningTemplate : $this->_warningTemplate);
+
+                        break;
+    
+                    case MpsSistemi_Iplocation_Model_Adminhtml_System_Config_Source_ViewType::ERROR:
+
+                        $this->setTemplate(($selectTemplate) ? $selectTemplate : $this->_selectTemplate);
+
+                        break;
+
+                    default:
+                        break;
+                }                    
+                        
+                break;
+            default:
+                $this->setTemplate('');
+                break;
+        }
+        
+        
+    }
+            
+    
 }

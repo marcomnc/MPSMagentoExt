@@ -70,12 +70,12 @@ class MpsSistemi_Iplocation_Helper_Data extends MpsSistemi_Core_Helper_Data {
     public function getStoreEnabledForZone($zone) {
         $wsId = 0;
         $enabledStore = array();
-        
+    
         if ($zone instanceof MpsSistemi_Iplocation_Model_Zone) {
             $myZone = $zone;
             $wsId = $zone->getWebsiteId();
-        }elseif(is_int($zone)) {
-            $myZone = Mage::getModel('mpslocation/zone')->Load($zone);
+        }elseif((int)$zone) {
+            $myZone = Mage::getModel('mpslocation/zone')->Load((int)$zone);
             if (!is_null($myZone)) {
                 $wsId = $myZone->getWebsiteId();
             }            

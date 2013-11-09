@@ -37,7 +37,7 @@ class MpsSistemi_ColorSwitch_Block_Adminhtml_Catalog_Attribute_Edit_Tabs extends
                 $this->addTab('colors', array(
                     'label'     => Mage::helper('mpsswitch')->__('Manage Color'),
                     'title'     => Mage::helper('mpsswitch')->__('Manage Color'),
-                    'content'   => $this->getLayout()->createBlock('mpsswitch/adminhtml_catalog_attribute_edit_tab_color')->toHtml(),
+                    'content'   => $this->getLayout()->createBlock('mpsswitcher/adminhtml_catalog_attribute_edit_tab_color')->toHtml(),
                 ));
                 
                 Mage_Adminhtml_Block_Widget_Tabs::_beforeToHtml();
