@@ -1,0 +1,194 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<style>
+    .mps-color-switcher>div,
+    .live-size-switcher {width: 30px; height: 30px; border:1px solid #000; float: left; cursor:pointer }
+    .live-size-switcher {text-align: center}
+</style>
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+$_attributeColorArray = preg_split('/,/', Mage::getStoreConfig('mpscore_options/color_switcher/color_attribute'));
+$_attributeSizeArray = preg_split('/,/', Mage::getStoreConfig('mpscore_options/color_switcher/size_attribute'));
+            
+?>
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <dl>
+    <?php foreach($_attributes as $_attribute): 
+            $_isColor = (array_search($_attribute->getProductAttribute()->getAttributeCode(),$_attributeColorArray ) !== false) ? true : false;
+            $_isSize  = (array_search($_attribute->getProductAttribute()->getAttributeCode(),$_attributeSizeArray  ) !== false) ? true : false;
+
+        ?>
+        <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
+        <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+            <div class="input-box">
+                <select <?php if($_isColor || $_isSize):?>style="visibility: hidden"<?php endif; ?> name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                  </select>
+            </div>
+                <?php 
+                $config = $_product->getTypeInstance(true);
+                
+                if ($_isColor):?>
+                <div class="mps-color-switcher">
+                    <?php foreach($config->getConfigurableAttributesAsArray($_product) as $_attrConf):
+                    
+                        if ($_attrConf['attribute_id'] == $_attribute->getAttributeId()):
+                            
+                            foreach ($_attrConf['values'] as $_values):
+                            
+                        ?>
+                         
+                    <div id="<?php echo $_values['value_index'];?>" class="selector" rel="attribute<?php echo $_attribute->getAttributeId() ?>">
+                        <?php 
+                        $color = Mage::getModel('mpsswitcher/coloroptions')->Load($_values['value_index'], 'option_id');                        
+                        if ($color->getImageColorUrl() <> ''):?>
+                            <img src ="<?php echo $color->getImageColorUrl();?>"/>
+                    <?php else: ?>
+                            <div class="background-color: #<?php echo $color->getColorHex();?>"></div>
+                    <?php endif; ?>
+                    </div>
+                                
+                    <?php endforeach;
+                            
+                        endif;
+                        
+                    endforeach;
+                      
+                    ?>
+                </div>
+                <?php endif;?>
+                <?php if ($_isSize): ?>
+                <div id="mps-size-container" rel="attribute<?php echo $_attribute->getAttributeId() ?>">
+                    
+                </div>
+                <?php endif;?>            
+        </dd>
+    <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+        
+        (function($,window,undefined){
+            
+            $.fn.ColorSwitch = function(sizeContainerSelector) {
+            
+                var $size = $(sizeContainerSelector);
+                var reset = function() {
+                    $(this).find('.selector').each(function () {
+                        $(this).removeCalss('selected');
+                    });
+                };
+                
+                function setSize(){
+                    var selectSizeId = $size.attr('rel');
+                    if ($size.length<=0 || $('#'+selectSizeId).length<=0) {
+                        return;
+                    }
+                    
+                    $('.live-size-switcher').unbind('click');
+                    $size.html('');
+                    
+                    $('#'+selectSizeId).find('option').each(function(idx,elem) {
+                        if ($(elem).attr('value') != "" && $(elem).attr('value') > 0) {
+                            var html = $size.html();                            
+                            html += '<div rel="'+$(elem).attr('value')+'" class="live-size-switcher">'+$(elem).html()+'</div>';
+                            $size.html(html);
+                        }
+                            
+                    });
+                }
+                
+                $('.live-size-switcher').live('click', function() {
+                    var selectSizeId = $size.attr('rel');
+                    $('.live-size-switcher').each (function(i,e) {
+                        $(e).removeClass('selected');                        
+                    });
+                    $(this).addClass('selected');
+
+                    for (var i =0 ; i < $('#'+selectSizeId+' option').length; i++) {
+                        var el = $('#'+selectSizeId+' option')[i];
+                        if ($(el).attr('value') == $(this).attr('rel')){
+                            $(el).attr('selected', 'selected');
+                            break;
+                        }
+                    }
+                    fireEvent(document.getElementById(selectSizeId), 'change');
+                });
+                
+                
+                function onClick(elem) {
+                    var selectId = $(elem).attr('rel');
+                    var optionId = $(elem).attr('id');
+                    
+                    reset();
+                    $('#'+selectId+' option').removeAttr('selected');
+                    for (var i =0 ; i < $('#'+selectId+' option').length; i++) {
+                        var el = $('#'+selectId+' option')[i];
+                        if ($(el).attr('value') == optionId){
+                            $(el).attr('selected', 'selected');
+                            break;
+                        }
+                    }
+                    $(elem).addClass('selected');
+                    fireEvent(document.getElementById(selectId), 'change');
+                    
+                    setSize();
+                    
+                }
+                
+                return $(this).find('.selector').each(function(idx, element) {
+                    $(element).click( function(){
+                        onClick(this);
+                    });
+                });
+                   
+            }
+        
+        })(jQuery, this);
+        
+        jQuery(document).ready(function() {
+            jQuery('.mps-color-switcher').ColorSwitch('#mps-size-container');
+        });
+/**
+ * Utility per simulare il click in prototype
+ */
+function fireEvent(element,event){
+    if (document.createEventObject){
+        // IE
+        var evt = document.createEventObject();
+        return element.fireEvent('on'+event,evt)
+    }
+    else{
+        // Other
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent(event, true, true ); 
+        return !element.dispatchEvent(evt);
+    }
+}
+    </script>
+<?php endif;?>
