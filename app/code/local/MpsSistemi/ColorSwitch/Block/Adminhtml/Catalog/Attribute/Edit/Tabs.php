@@ -28,6 +28,7 @@ class MpsSistemi_ColorSwitch_Block_Adminhtml_Catalog_Attribute_Edit_Tabs extends
         parent::_beforeToHtml();
 
         $colorAttribute = MAge::Helper('mpsswitcher/media')->getAttributeColorArray();
+
         if ($colorAttribute !== false) {
             
             $model = Mage::registry('entity_attribute');
@@ -35,8 +36,8 @@ class MpsSistemi_ColorSwitch_Block_Adminhtml_Catalog_Attribute_Edit_Tabs extends
             if (array_search($model->getAttributeCode(), $colorAttribute) !== false) {    
 
                 $this->addTab('colors', array(
-                    'label'     => Mage::helper('mpsswitch')->__('Manage Color'),
-                    'title'     => Mage::helper('mpsswitch')->__('Manage Color'),
+                    'label'     => Mage::helper('mpsswitcher')->__('Manage Color'),
+                    'title'     => Mage::helper('mpsswitcher')->__('Manage Color'),
                     'content'   => $this->getLayout()->createBlock('mpsswitcher/adminhtml_catalog_attribute_edit_tab_color')->toHtml(),
                 ));
                 

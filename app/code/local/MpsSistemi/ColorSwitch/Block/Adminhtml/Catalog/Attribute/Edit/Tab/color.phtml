@@ -1,6 +1,6 @@
 <div class="entity-edit color-manager">
     <div class="entry-edit-head">
-        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mpsswitch')->__('Manage Colors') ?></h4>
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mpsswitcher')->__('Manage Colors') ?></h4>
     </div>
     <div class="box">
         <div class="hor-scroll">
@@ -11,12 +11,12 @@
         <div class="hor-scroll">
             <table>
                 <tr>
-                    <th width="150"><?php echo Mage::helper('mpsswitch')->__('Color Label') ?></th>
-                    <th width="250"><?php echo Mage::helper('mpsswitch')->__('Upload Switch Image') ?></th>
-                    <th><?php echo Mage::helper('mpsswitch')->__('Hex Color') ?></th>
+                    <th width="150"><?php echo Mage::helper('mpsswitcher')->__('Color Label') ?></th>
+                    <th width="250"><?php echo Mage::helper('mpsswitcher')->__('Upload Switch Image') ?></th>
+                    <th><?php echo Mage::helper('mpsswitcher')->__('Hex Color') ?></th>
                 </tr>
-                <?php foreach (MAge::helper('mpsswitch')->getAttributeOptions($this->getAttribute(), 1) as $_attribute): 
-                    $_colorOption = Mage::getModel('mpsswitch/coloroptions')->Load($_attribute['value'], 'option_id');                
+                <?php foreach (MAge::helper('mpsswitcher/media')->getAttributeOptions($this->getAttribute(), 1) as $_attribute): 
+                    $_colorOption = Mage::getModel('mpsswitcher/coloroptions')->Load($_attribute['value'], 'option_id');                
                     ?>
                 <tr>
                     <td>

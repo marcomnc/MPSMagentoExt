@@ -6,7 +6,7 @@
         </MpsSistemi_ColorSwitch>
     </modules>
     <global>
-        <event>
+        <events>
             <!-- Memorizzazione Attributi (per gestire le immagini) -->            
             <catalog_entity_attribute_save_after>
                 <observers>
@@ -17,7 +17,7 @@
                     </mpswitcer_observer>
                 </observers>
             </catalog_entity_attribute_save_after>
-        </event>
+        </events>
         <blocks>
             <mpsswitcher>
                 <class>MpsSistemi_ColorSwitch_Block</class>

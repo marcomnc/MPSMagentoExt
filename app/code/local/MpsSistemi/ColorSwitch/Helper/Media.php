@@ -21,7 +21,7 @@
  * @author      MPS Sistemi S.a.s - Marco Mancinelli <marco.mancinelli@mps-sistemi.it>
  *
  */
-class MpsSistemi_ColorSwitch_Helper_Media extends Veredus_Veredus_Helper_Data {
+class MpsSistemi_ColorSwitch_Helper_Media extends MpsSistemi_ColorSwitch_Helper_Data {
     
     /**
      * Ritorna l'array con gli attributi che rappresentano i colori
@@ -168,8 +168,8 @@ class MpsSistemi_ColorSwitch_Helper_Media extends Veredus_Veredus_Helper_Data {
     }
     
     private function _getAttributeArray($type) {
-        if (Mage::getStoreConfig("veredus/settings/attribute_$type") != "") {
-            return preg_split('/,/', Mage::getStoreConfig("veredus/settings/attribute_$type"));
+        if (Mage::getStoreConfig("mpscore_options/color_switcher/".$type."_attribute") != "") {
+            return preg_split('/,/', Mage::getStoreConfig("mpscore_options/color_switcher/".$type."_attribute"));
         } else {
            return false;
         }
