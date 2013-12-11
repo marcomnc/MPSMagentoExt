@@ -7,7 +7,7 @@
         <reference name="head">
             <action method="addItemIfConfig">
                 <type>js</type>
-                <name>mps/jquery/jquery-1.7.1.min.js</name>
+                <name>mps/jquery/jquery.js</name>
                 <condConfig>mpscore_options/skin_config/include_jquery</condConfig>
             </action>            
             <action method="addItemIfConfig">

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MpsSistemi_Catalog>
+            <version>0.1.0</version>
+        </MpsSistemi_Catalog>
+    </modules>
+    <global>
+        
+        <blocks>
+            <mpscatalog>
+                <class>MpsSistemi_Catalog_Block</class>
+            </mpscatalog>
+            
+            <adminhtml>
+                <rewrite>
+                    <catalog_category_tab_product>MpsSistemi_Catalog_Block_Adminhtml_Category_Tab_Product</catalog_category_tab_product>
+                </rewrite>
+            </adminhtml>            
+        </blocks>
+        <models>
+            <mpscatalog>
+                <class>MpsSistemi_Catalog_Model</class>
+            </mpscatalog>
+        </models>
+        <helpers>
+            <mpscatalog>
+                <class>MpsSistemi_Catalog_Helper</class>
+            </mpscatalog>
+        </helpers>
+    </global>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <mpscatalog_options>
+                                            <title>Mps Sistemi - Catalogo</title>
+                                        </mpscatalog_options>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+		    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>
