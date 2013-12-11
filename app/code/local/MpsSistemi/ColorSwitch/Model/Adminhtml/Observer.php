@@ -45,7 +45,8 @@ class MpsSistemi_ColorSwitch_Model_Adminhtml_Observer {
                     $model->delete();
                 }
             } else {
-                
+
+		$_fileName = "";                
                 if (isset($_FILES['filename']['name'][$value]) && $_FILES['filename']['name'][$value] != "") {
                     try {
                         $_fileName = "";
@@ -65,21 +66,28 @@ class MpsSistemi_ColorSwitch_Model_Adminhtml_Observer {
                                         'Errore in fase di Memorizzazione del file ' . $_FILES['filename']['name'][$value]) ."\n" . 
                                         $ex->getMessage());
                     }
-                }
-                if (isset($data['filename_delete'][$value]) && $data['filename_delete'][$value] = "1") {
-                    $model = Mage::getModel('mpsswitcher/coloroptions')->Load($value, 'option_id');
-                    $model->deleteImageFile();
-                    $_fileName = "";
-                }
-                
-                $model = Mage::getModel('mpsswitcher/coloroptions')->Load($value, 'option_id');
+		}
+
+		$model = Mage::getModel('mpsswitcher/coloroptions')->Load($value, 'option_id');
                 if ($model->getId() == 0) {
                     $model = Mage::getModel('mpsswitcher/coloroptions');
                     $model->setData('option_id', $value);
+		    $_curfile = '';
+                } else {
+		    $_curfile = $model->getData('img_url');
+		}
+
+                if (isset($data['filename_delete'][$value]) && $data['filename_delete'][$value] = "1") {
+                    $model->deleteImageFile();
+                    $_fileName = "";
                 }
+
+		if ($_fileName != '') {
+		    $_curfile = $_fileName;
+		}
+                
                 $model->setData('attribute_id', $data['attribute_id']);
-                if (isset($_fileName)) 
-                    $model->setData('img_url', $_fileName);
+                $model->setData('img_url', $_curfile);
                 $model->setData('color_hex', isset($data['color_hex'][$value]) ? $data['color_hex'][$value]: '');             
                 $model->Save();
             }

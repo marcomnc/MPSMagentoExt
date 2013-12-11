@@ -238,7 +238,7 @@ class MpsSistemi_Iplocation_Helper_Data extends MpsSistemi_Core_Helper_Data {
             
             if (!$allowBillingCountry) {
                 //Imposto abilitati tutti i paesi e blocco le spedizioni
-                $allowCountry = implode(Mage::getModel('directory/country')->getResourceCollection()->toArray());
+                $allowCountry = implode($this->getAllCountryIds(),',');                
                 $config->saveConfig('general/country/allow', $allowCountry, 'websites', $k);
                 
                 foreach ( Mage::app()->getWebsite($k)->getConfig('carriers') as $code => $cconfig) {
@@ -344,6 +344,15 @@ class MpsSistemi_Iplocation_Helper_Data extends MpsSistemi_Core_Helper_Data {
             }            
         }
     }
-    
+  
+    public function getAllCountryIds() {
+        $countryId = array();
+        foreach (Mage::getModel('directory/country')->getCollection() as $country) {
+            $countryId[] = $country->getId();
+        }
+        
+        return $countryId;
+                
+    }
 }
 ?>

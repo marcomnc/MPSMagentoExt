@@ -36,12 +36,12 @@
             <layouts>
                 <simple_popup translate="label">
                     <label>(Mps Core) Simple Popup</label>
-                    <template>mps/page/popup-simple.phtml</template>   
+                    <template>mps/core/page/popup-simple.phtml</template>   
                     <layout_handle>page_simple_popup</layout_handle>                 
                 </simple_popup>          
                 <popup_mpslayout translate="label">
                     <label>(Mps Core) Popup con Layout</label>
-                    <template>mps/page/popup-mps.phtml</template>                    
+                    <template>mps/core/page/popup-mps.phtml</template>                    
                     <layout_handle>page_popup_mps</layout_handle>                 
                 </popup_mpslayout>          
             </layouts>
