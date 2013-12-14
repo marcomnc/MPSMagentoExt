@@ -26,7 +26,7 @@
 
 <config>
     <tabs>
-        <mpssettings translate="label" module="mpslocation">
+        <mpssettings translate="label" module="mpscore">
             <label>Mps Sistemi Settings</label>
             <sort_order>999</sort_order>
         </mpssettings>

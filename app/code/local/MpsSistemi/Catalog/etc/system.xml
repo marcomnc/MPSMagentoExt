@@ -26,7 +26,7 @@
 
 <config>       
     <sections>
-        <mpscatalog_options translate="label" module="mpslocation">
+        <mpscatalog_options translate="label" module="mpscatalog">
             <label>Catalogo</label>
             <tab>mpssettings</tab>
             <sort_order>600</sort_order>

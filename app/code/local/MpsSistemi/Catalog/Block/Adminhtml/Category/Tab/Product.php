@@ -24,6 +24,36 @@
 
 class MpsSistemi_Catalog_Block_Adminhtml_Category_Tab_Product extends Mage_Adminhtml_Block_Catalog_Category_Tab_Product {
     
+    
+    public function __construct() {
+        
+        parent::__construct();
+        
+        $this->setAdditionalJavaScript('
+                if (typeof(MpsProduct) === "undefined") {
+                    var MpsProduct = {};
+                }
+                MpsProduct.PopUpCategoryProduct = Class.create();
+                MpsProduct.PopUpCategoryProduct.prototype = {
+                    initialize: function () {
+                        this.win = null;
+                    },        
+                    openPopup : function(url) {
+                        if (this.win && !this.win.closed) {
+                            this.win.close();
+                        }
+
+                        this.win = window.open(url, "",
+                                "width=1000,height=700,resizable=1,scrollbars=1");
+                        this.win.focus();
+                    }
+                };
+                
+                var popupcategoryproduct = new MpsProduct.PopUpCategoryProduct();
+                '
+        );
+        
+    }    
     /**
      * Override della funzoine base per visualizzare il tipo di prodotto
      * @return type
@@ -79,7 +109,74 @@ class MpsSistemi_Catalog_Block_Adminhtml_Category_Tab_Product extends Mage_Admin
             'editable'  => !$this->getCategory()->getProductsReadonly()
             //'renderer'  => 'adminhtml/widget_grid_column_renderer_input'
         ));
+        
+        $this->addColumn( 'image', 
+            array(
+                'header'    => Mage::helper('catalog')->__('Image'),
+                'type'      => 'text',
+                'filter'    => false,
+                'sortable'  => false,
+                'frame_callback' => array($this, 'decorateImage'),
+            ) 
+        );
+        
+        $this->addColumn('action',
+            array(
+                'header'    => Mage::helper('catalog')->__('Action'),
+                'type'      => 'text',
+                'getter'     => 'getId',
+                'filter'    => false,
+                'sortable'  => false,
+                'frame_callback' => array($this, 'decorateAction'),
+        ));
+        
+        $this->addColumn('delete',
+            array(
+                'header'    => Mage::helper('catalog')->__('Remove'),
+                'type'      => 'text',
+                'filter'    => false,
+                'sortable'  => false,
+                'frame_callback' => array($this, 'decorateRemove'),
+        ));
 
         return Mage_Adminhtml_Block_Widget_Grid::_prepareColumns();
     }
+    
+    public function decorateAction($value, $row, $column, $isExport) {
+        $cell = '';
+               
+        $url = Mage::helper("adminhtml")->getUrl("adminhtml/catalog_product/edit/",array("id" => $row->getId(), "popup" => 1));
+        $cell = '<a class="popup-category" onClick="popupcategoryproduct.openPopup(this.href);return false;" href="' . $url . '">' . Mage::helper('catalog')->__('Edit'). '</a>';
+        
+        return $cell;
+    }
+    
+    public function decorateRemove($value, $row, $column, $isExport) {
+        $cell = '';
+               
+        $url = Mage::helper("adminhtml")->getUrl("adminhtml/catalog_product/delete/",array("id" => $row->getId(), "popup" => 1));
+        $cell = '<a class="popup-category" onClick="confirmSetLocation(\''.Mage::helper('catalog')->__('Are you sure?').'\', \'$url\');" href="' . $url . '">' . Mage::helper('catalog')->__('Remove'). '</a>';
+        
+        return $cell;
+    }
+    
+    public function decorateImage($value, $row, $column, $isExport) {
+
+       $product = Mage::getModel('catalog/product')->Load($row->getEntityId());
+       $img = $product->getImage();
+       $cell = "";
+       if ($img != "" && $img != "no_image" && $img != "no_selection") {       
+        $imgUrl = Mage::helper('catalog/image')->init($product, 'image')->resize(75);
+       
+           $cell = "<center>"
+               . "<a href=\"#\" onclick=\"window.open('$imgUrl', '$img')\" title=\"$img\""
+               . " url=\"$imgUrl\" id=\"imageurl\">"
+               . "<img src=\"$imgUrl\" width=\"75\">"
+               . "</a>"
+               . "</center>";           
+       }
+       return $cell;
+    }
+    
 }
+
